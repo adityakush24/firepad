@@ -72,6 +72,17 @@ before we can accept your pull request.
 If you'd like to contribute to Firepad, you'll need to do the following to get your environment
 set up.
 
+### Setup Firebase
+In order to perform tests, you have to get your own firebase keys and export them as an enviroment var.
+
+```bash
+# Change with your own api key and database url - must be a valid json
+export FIREBASE_CONFIG='{
+  "apiKey": "AHdS3A657ufbgfnhnhH8wtXGCzPFqBWYccsdfdfXSas",
+  "databaseURL": "https://my-database-default-rtdb.europe-west1.firebasedatabase.app"
+}'
+```
+
 ### Install Dependencies
 
 ```bash

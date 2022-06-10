@@ -11,6 +11,7 @@ node_modules
 lib/ace-adapter.js
 dist/firepad.zip
 dist/
+test/specs/firebase-config.js
 
 *.log
 _site/

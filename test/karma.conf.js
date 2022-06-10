@@ -1,3 +1,36 @@
+const fs = require('fs')
+const { exit } = require('process')
+
+
+// Get firebase keys from env var
+const firebaseConfig = process.env.FIREBASE_CONFIG
+try {
+  JSON.parse(firebaseConfig)
+}catch(e){
+  console.log(`ERROR: no firebase keys/invalid keys provided. Please setup the FIREBASE_CONFIG env var properly. 
+For example, run something like (replace with your own keys): 
+
+export FIREBASE_CONFIG='{
+  "apiKey": "AHdS3A657ufbgfnhnhH8wtXGCzPFqBWYccsdfdfXSas",
+  "databaseURL": "https://my-database-default-rtdb.europe-west1.firebasedatabase.app"
+}'
+
+Current key:
+${firebaseConfig}
+
+Parsing error:
+${e}
+`)
+  exit(1)
+}
+
+// Write keys to a generated file
+fs.writeFileSync(__dirname  + '/specs/firebase-config.js', `
+// Initialize the Firebase SDK
+var config = ${firebaseConfig};
+`)
+
+
 module.exports = function(config) {
   config.set({
     frameworks: ["jasmine"],
@@ -74,6 +107,7 @@ module.exports = function(config) {
       "../lib/headless.js",
       "../lib/firepad.js",
 
+      "./specs/firebase-config.js",
       "./specs/helpers.js",
       "./specs/*.spec.js"
     ]
