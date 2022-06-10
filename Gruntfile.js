@@ -71,6 +71,7 @@ module.exports = function (grunt) {
           "lib/client.js",
           "lib/editor-client.js",
           "lib/ace-adapter.js",
+          "lib/codemirror6-adapter.js",
           "lib/monaco-adapter.js",
           "lib/constants.js",
           "lib/entity-manager.js",
