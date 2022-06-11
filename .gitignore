@@ -8,9 +8,9 @@ test/coverage/
 node_modules
 
 # generated
-lib/ace-adapter.js
-dist/firepad.zip
-dist/
+#lib/ace-adapter.js
+#dist/firepad.zip
+#dist/
 test/specs/firebase-config.js
 
 *.log

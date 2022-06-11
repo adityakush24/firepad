@@ -1,6 +1,10 @@
 import copy from 'rollup-plugin-copy'
 import {nodeResolve} from "@rollup/plugin-node-resolve"
+import { terser } from "rollup-plugin-terser";
+import packageManifest from "./package.json"
 
+
+const production = !process.env.ROLLUP_WATCH;
 
 
 
@@ -10,7 +14,7 @@ const banner = `/*!
  * it requires no server-side code and can be added to any web app simply by
  * including a couple JavaScript files.
  *
- * Firepad 0.0.0
+ * Firepad ${packageManifest.version}
  * http://www.firepad.io/
  * License: MIT
  * Copyright: 2014 Firebase
@@ -18,7 +22,7 @@ const banner = `/*!
  */
 `
 
-export default {
+export default[ {
   input: 'src/firepad.js',
   context: 'this',
   output: {
@@ -35,5 +39,17 @@ export default {
       ]
     }),
   ],
-
-};
+}, production && { // Add minified on production
+  input: 'src/firepad.js',
+  context: 'this',
+  output: {
+    banner,
+    name: 'Firepad',
+    file: 'dist/firepad.min.js',
+    format: 'umd'
+  },
+  plugins: [
+    nodeResolve(),
+    terser()
+  ],
+} ]

@@ -9,6 +9,9 @@ You can run the examples by simply opening any of the following files in your br
   * [`userlist.html`](./userlist.html) - Rich-text editing with a list of users showing who's
   currently present.
 
+## Codemirror6 and rollup bundling
+Check the demo [here](https://github.com/lucafabbian/codemirror6-firepad-demo)
+
 ## Security Rules
 
 Example Realtime Database Security Rules to protect your Firepad data can be found in the

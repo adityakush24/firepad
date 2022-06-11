@@ -77,12 +77,12 @@
     "karma-spec-reporter": "0.0.32",
     "monaco-editor": "^0.20.0",
     "rollup": "^2.75.6",
-    "rollup-plugin-copy": "^3.4.0"
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-terser": "^7.0.2"
   },
   "scripts": {
     "coffee": "coffee -c src/*.coffee",
-    "test": "karma start test/karma.conf.js",
-    "travis": "grunt",
+    "test": "karma start test/karma.conf.js # CURRENTLY BROKEN!!!",
     "dev": "npm run coffee && rollup -cw",
     "build": "npm run coffee && rollup -c"
   }

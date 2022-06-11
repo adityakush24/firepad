@@ -12,13 +12,13 @@ The original repository is no longer under active development. While Firepad it'
 
 Some major changes:
 - new package loader: `grunt` has been replaced with `rollup`
-- new adapter to add compatibility with `Codemirror 6`, arguably one of the best js editor out there
+- new adapter to add compatibility with `Codemirror 6`, arguably one of the best js editor out there. Check the demo [here](https://github.com/lucafabbian/codemirror6-firepad-demo)
 - more to come!
 
 ## Status
 The new build system seem to work without any issue, but tests are broken. It may be a good idea to rewrite them using a newer framework such as Jest.
 
-Codemirror 6 works with minor bugs, especially related to multi selection and copy and paste.
+Codemirror 6 works, while still missing multicursor display.
 
 
 ## Table of Contents
@@ -106,6 +106,8 @@ Firepad supports rich text editing with [CodeMirror](http://codemirror.net/) and
 ## Examples
 
 You can find some Firepad examples [here](examples/README.md).
+
+Also make sure to check the [Codemirror6 demo](https://github.com/lucafabbian/codemirror6-firepad-demo).
 
 
 ## Contributing
