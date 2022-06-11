@@ -6,7 +6,6 @@ import {utils} from './utils.js'
 import {LineFormatting} from './line-formatting.js'
 import {SerializeHtml} from './serialize-html.js'
 import {ATTR} from './constants.js'
-import {CodeMirror6Adapter} from './codemirror6-adapter.js'
 import {textPiecesToInserts} from './text-pieces-to-inserts.js'
 import {EditorClient} from './editor-client.js'
 import {Text} from './text.js'
@@ -21,6 +20,7 @@ import { RichTextCodeMirror} from './rich-text-codemirror.js'
 import { RichTextToolbar} from './rich-text-toolbar.js'
 import { ACEAdapter} from './ace-adapter.js'
 import {MonacoAdapter} from './monaco-adapter.js'
+import {CodeMirror6Adapter} from './codemirror6-adapter.js'
 
 
 
@@ -54,7 +54,6 @@ const Firepad = (function() {
     if(place.type === 'CodeMirror6'){
       this.codeMirror6_ = this.editor_ = place.editor;
       const curValue = this.codeMirror6_.state.doc.toString()
-      console.log(curValue)
       if (curValue !== '') {
         throw new Error("Can't initialize Firepad with a CodeMirror6 instance that already contains text.");
       }
@@ -131,7 +130,7 @@ const Firepad = (function() {
 
     this.firebaseAdapter_ = new FirebaseAdapter(ref, userId, userColor);
     if(this.codeMirror6_){
-      this.editorAdapter_ = new CodeMirror6Adapter(this.codeMirror6_);
+      this.editorAdapter_ = new CodeMirror6Adapter(this.codeMirror6_, this.options_);
     }else if (this.codeMirror_) {
       this.richTextCodeMirror_ = new RichTextCodeMirror(this.codeMirror_, this.entityManager_, { cssPrefix: 'firepad-' });
       this.editorAdapter_ = new RichTextCodeMirrorAdapter(this.richTextCodeMirror_);

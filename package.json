@@ -1,5 +1,9 @@
 {
   "name": "@lucafabbian/firepad",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "description": "Collaborative text editing powered by Firebase",
   "version": "1.5.12",
   "author": "Firebase (https://firebase.google.com/)",
@@ -30,7 +34,7 @@
     "editor",
     "firebase",
     "realtime",
-    "collaborative", 
+    "collaborative",
     "codemirror6"
   ],
   "main": "dist/firepad.min.js",
@@ -43,13 +47,14 @@
     "package.json"
   ],
   "dependencies": {
+    "codemirror": "^6.0.0",
     "firebase": "^7.13.2",
-    "jsdom": "^16.2.2",
-    "codemirror": "^6.0.0"
+    "jsdom": "^16.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
+    "@codemirror/state": "^6.0.0",
     "@rmw/rollup-plugin-coffee": "^0.1.21",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "coffeescript": "^2.7.0",

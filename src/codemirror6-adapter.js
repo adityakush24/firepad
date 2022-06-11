@@ -2,8 +2,8 @@ import {TextOperation} from './text-operation.js'
 import {Cursor} from './cursor.js'
 
 
-import {EditorView } from "codemirror"
-import {StateEffect, Annotation} from '@codemirror/state'
+import {Annotation} from '@codemirror/state'
+
 
 'use strict';
 
@@ -68,9 +68,8 @@ var CodeMirror6Adapter = function () {
    * @prop {CodeMirror6IDisposable} didFocusHandler - Event Handler for Focus Gain on Editor Text/Widget
    * @prop {CodeMirror6IDisposable} didChangeCursorPositionHandler - Event Handler for Cursor Position Change
    */
-  function CodeMirror6Adapter(cmIstance) {
+  function CodeMirror6Adapter(cmIstance, {StateEffect}) {
 
-    /** House Keeping */
 
     /* TODO: check if is valid codemirror6 istance
 
@@ -100,22 +99,25 @@ var CodeMirror6Adapter = function () {
     var _this = this;
 
 
+
+
     cm.dispatch({
       effects: StateEffect.appendConfig.of(
 
-        EditorView.updateListener.of((v) => {
+        cm.constructor.updateListener.of((v) => {
+
           if (v.docChanged && !(
             v.transactions[0] && v.transactions[0].annotations.some( a => a.type == 'firepad')
             )) {
+
 
             let index = 0
             let change_op  = new TextOperation()
             let inverse_op = new TextOperation()
 
+
             //Iterate over changes
-            console.log(v.changes.toJSON())
             v.changes.toJSON().forEach(c => {
-              console.log('change ', c)
               if(typeof c == 'number'){
                 if(c != 0){
                   index += c
@@ -126,7 +128,7 @@ var CodeMirror6Adapter = function () {
                 const [len, ...inserts] = c
                 if(len > 0){
                   change_op = change_op.delete(len)
-                  inverse_op = inverse_op.insert(_this.cm.state.sliceDoc(index, index + len))
+                  inverse_op = inverse_op.insert(v.startState.sliceDoc(index, index + len))
                 }
                 if(inserts){
                   const jInserts = inserts.join('\n')
@@ -201,7 +203,6 @@ CodeMirror6Adapter.prototype.getCursor = function getCursor() {
  */
 CodeMirror6Adapter.prototype.setCursor = function setCursor(cursor) {
 
-  console.log("cursoooor", cursor);
 
   var anchor = cursor.position;
   var head = cursor.selectionEnd;
