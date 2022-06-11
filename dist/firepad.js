@@ -6714,14 +6714,15 @@
       this.onBlur = this.onBlur.bind(this);
       this.onFocus = this.onFocus.bind(this);
       this.onCursorActivity = this.onCursorActivity.bind(this);
+      var _this = this;
 
 
 
 
-      cm.dispatch({
+      _this.cm.dispatch({
         effects: StateEffect.appendConfig.of(
 
-          cm.constructor.updateListener.of((v) => {
+          _this.cm.constructor.updateListener.of((v) => {
 
             if (v.docChanged && !(
               v.transactions[0] && v.transactions[0].annotations.some( a => a.type == 'firepad')
@@ -6823,7 +6824,7 @@
 
     var anchor = cursor.position;
     var head = cursor.selectionEnd;
-    cm.dispatch({ selection: { anchor, head } });
+    this.cm.dispatch({ selection: { anchor, head } });
 
   };
 
@@ -6938,13 +6939,15 @@
     /** Get Operations List */
     var opsList = operation.ops;
     var index = 0;
+
+    var _this = this;
     opsList.forEach(function (op) {
       /** Retain Operation */
       if (op.isRetain()) {
         index += op.chars;
       } else if (op.isInsert()) {
         /** Insert Operation */
-        cm.dispatch({
+        _this.cm.dispatch({
           annotations: [new Annotation('firepad', true)],
           changes: { from: index, to: index, insert: op.text }
         });
@@ -6953,7 +6956,7 @@
         index += op.text.length;
       } else if (op.isDelete()) {
         /** Delete Operation */
-        cm.dispatch({
+        _this.cm.dispatch({
           annotations: [new Annotation('firepad', true)],
           changes: { from: index, to: index + op.chars, insert: '' }
         });

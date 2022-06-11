@@ -101,10 +101,10 @@ var CodeMirror6Adapter = function () {
 
 
 
-    cm.dispatch({
+    _this.cm.dispatch({
       effects: StateEffect.appendConfig.of(
 
-        cm.constructor.updateListener.of((v) => {
+        _this.cm.constructor.updateListener.of((v) => {
 
           if (v.docChanged && !(
             v.transactions[0] && v.transactions[0].annotations.some( a => a.type == 'firepad')
@@ -206,7 +206,7 @@ CodeMirror6Adapter.prototype.setCursor = function setCursor(cursor) {
 
   var anchor = cursor.position;
   var head = cursor.selectionEnd;
-  cm.dispatch({ selection: { anchor, head } })
+  this.cm.dispatch({ selection: { anchor, head } })
 
 };
 
@@ -329,7 +329,7 @@ CodeMirror6Adapter.prototype.applyOperation = function applyOperation(operation)
       index += op.chars;
     } else if (op.isInsert()) {
       /** Insert Operation */
-      cm.dispatch({
+      _this.cm.dispatch({
         annotations: [new Annotation('firepad', true)],
         changes: { from: index, to: index, insert: op.text }
       })
@@ -338,7 +338,7 @@ CodeMirror6Adapter.prototype.applyOperation = function applyOperation(operation)
       index += op.text.length;
     } else if (op.isDelete()) {
       /** Delete Operation */
-      cm.dispatch({
+      _this.cm.dispatch({
         annotations: [new Annotation('firepad', true)],
         changes: { from: index, to: index + op.chars, insert: '' }
       })
