@@ -1,21 +1,22 @@
 {
-  "name": "firepad",
+  "name": "@lucafabbian/firepad",
   "description": "Collaborative text editing powered by Firebase",
-  "version": "1.5.11",
+  "version": "1.5.12",
   "author": "Firebase (https://firebase.google.com/)",
   "contributors": [
+    "Luca Fabbian <luca.fabbian.1999@gmail.com>",
     "Michael Lehenbauer <michael@firebase.com>"
   ],
   "homepage": "http://www.firepad.io/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/firebase/firepad.git"
+    "url": "https://github.com/lucafabbian/firepad.git"
   },
   "browser": {
     "jsdom": false
   },
   "bugs": {
-    "url": "https://github.com/firebase/firepad/issues"
+    "url": "https://github.com/lucafabbian/firepad/issues"
   },
   "licenses": [
     {
@@ -29,23 +30,29 @@
     "editor",
     "firebase",
     "realtime",
-    "collaborative"
+    "collaborative", 
+    "codemirror6"
   ],
   "main": "dist/firepad.min.js",
+  "module": "src/firepad.js",
   "files": [
     "dist/**",
+    "src/**",
     "LICENSE",
     "README.md",
     "package.json"
   ],
   "dependencies": {
     "firebase": "^7.13.2",
-    "jsdom": "^16.2.2"
+    "jsdom": "^16.2.2",
+    "codemirror": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
-    "codemirror": "^5.52.2",
+    "@rmw/rollup-plugin-coffee": "^0.1.21",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "coffeescript": "^2.7.0",
     "coveralls": "^3.0.11",
     "grunt": "^1.1.0",
     "grunt-cli": "^1.3.2",
@@ -63,12 +70,15 @@
     "karma-failed-reporter": "0.0.3",
     "karma-jasmine": "^3.1.1",
     "karma-spec-reporter": "0.0.32",
-    "monaco-editor": "^0.20.0"
+    "monaco-editor": "^0.20.0",
+    "rollup": "^2.75.6",
+    "rollup-plugin-copy": "^3.4.0"
   },
   "scripts": {
-    "test": "grunt test",
+    "coffee": "coffee -c src/*.coffee",
+    "test": "karma start test/karma.conf.js",
     "travis": "grunt",
-    "dev": "grunt watch",
-    "build": "grunt build"
+    "dev": "npm run coffee && rollup -cw",
+    "build": "npm run coffee && rollup -c"
   }
 }

@@ -6,13 +6,19 @@ designed to be embedded inside larger web applications.
 Join our [Firebase Google Group](https://groups.google.com/forum/#!forum/firebase-talk) to ask
 questions, request features, or share your Firepad apps with the community.
 
+## Why this fork?
+
+The original repository is no longer under active development. While Firepad it's still a pretty solid piece of software, it was developed in the early days of javascript. This fork aims to improve the package and make it work with modern libraries, while sticking to the original code as close as possible. Unlike forks such as [firepad-x](#https://github.com/interviewstreet/firepad-x), this won't be a major rewrite (which will take really long time to be stable), but will just provide some nice enhancements, updates and bug fixes.
+
+Some major changes:
+- new package loader: `grunt` has been replaced with `rollup`
+- new adapter to add compatibility with `Codemirror 6`, arguably one of the best js editor out there
+- more to come!
+
 ## Status
+The new build system seem to work without any issue, but tests are broken. It may be a good idea to rewrite them using a newer framework such as Jest.
 
-![Status: Frozen](https://img.shields.io/badge/Status-Frozen-yellow)
-
-This repository is no longer under active development. No new features will be added and issues are not actively triaged. Pull Requests which fix bugs are welcome and will be reviewed on a best-effort basis.
-
-If you maintain a fork of this repository that you believe is healthier than the official version, we may consider recommending your fork. Please open a Pull Request if you believe that is the case.
+Codemirror 6 works with minor bugs, especially related to multi selection and copy and paste.
 
 
 ## Table of Contents
