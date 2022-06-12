@@ -2,7 +2,7 @@ import {TextOperation} from './text-operation.js'
 import {Cursor} from './cursor.js'
 
 
-import {Annotation} from '@codemirror/state'
+import {Annotation, StateEffect} from '@codemirror/state'
 
 
 'use strict';
@@ -10,7 +10,7 @@ import {Annotation} from '@codemirror/state'
 
 /**
  * @function getCSS - For Internal Usage Only
- * @param {String} clazz - CSS Class Name
+ * @param {String} clazz - CSS Class Name 
  * @param {String} bgColor - Background Color
  * @param {String} color - Font Color
  * @returns CSS Style Rules according to Parameters
@@ -68,7 +68,7 @@ var CodeMirror6Adapter = function () {
    * @prop {CodeMirror6IDisposable} didFocusHandler - Event Handler for Focus Gain on Editor Text/Widget
    * @prop {CodeMirror6IDisposable} didChangeCursorPositionHandler - Event Handler for Cursor Position Change
    */
-  function CodeMirror6Adapter(cmIstance, {StateEffect}) {
+  function CodeMirror6Adapter(cmIstance) {
 
 
     /* TODO: check if is valid codemirror6 istance

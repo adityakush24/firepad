@@ -5,7 +5,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "description": "Collaborative text editing powered by Firebase",
-  "version": "1.5.13",
+  "version": "1.5.14",
   "author": "Firebase (https://firebase.google.com/)",
   "contributors": [
     "Luca Fabbian <luca.fabbian.1999@gmail.com>",
@@ -47,27 +47,16 @@
     "package.json"
   ],
   "dependencies": {
-    "codemirror": "^6.0.0",
-    "firebase": "^7.13.2",
+    "firebase": "^9.8.3",
     "jsdom": "^16.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
-    "@codemirror/state": "^6.0.0",
     "@rmw/rollup-plugin-coffee": "^0.1.21",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "coffeescript": "^2.7.0",
     "coveralls": "^3.0.11",
-    "grunt": "^1.1.0",
-    "grunt-cli": "^1.3.2",
-    "grunt-coffeelint": "0.0.16",
-    "grunt-contrib-coffee": "^2.1.0",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-uglify-es": "github:gruntjs/grunt-contrib-uglify#harmony",
-    "grunt-contrib-watch": "^1.1.0",
-    "grunt-karma": "^3.0.2",
     "jasmine-core": "^3.5.0",
     "karma": "^4.4.1",
     "karma-chrome-launcher": "^3.1.0",
@@ -79,6 +68,10 @@
     "rollup": "^2.75.6",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-terser": "^7.0.2"
+  },
+  "peerDependencies": {
+    "@codemirror/state": "^6.0.0",
+    "codemirror": "^6.0.0"
   },
   "scripts": {
     "coffee": "coffee -c src/*.coffee",
