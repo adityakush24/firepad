@@ -47,15 +47,10 @@
     "package.json"
   ],
   "dependencies": {
-    "firebase": "^9.8.3",
     "jsdom": "^16.2.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
-    "@rmw/rollup-plugin-coffee": "^0.1.21",
     "@rollup/plugin-node-resolve": "^13.3.0",
-    "coffeescript": "^2.7.0",
     "coveralls": "^3.0.11",
     "jasmine-core": "^3.5.0",
     "karma": "^4.4.1",
@@ -70,13 +65,13 @@
     "rollup-plugin-terser": "^7.0.2"
   },
   "peerDependencies": {
+    "firebase": "^9.8.3",
     "@codemirror/state": "^6.0.0",
     "codemirror": "^6.0.0"
   },
   "scripts": {
-    "coffee": "coffee -c src/*.coffee",
     "test": "karma start test/karma.conf.js # CURRENTLY BROKEN!!!",
-    "dev": "npm run coffee && rollup -cw",
-    "build": "npm run coffee && rollup -c"
+    "dev": "rollup -w -c",
+    "build": "rollup -c"
   }
 }

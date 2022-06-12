@@ -22,7 +22,7 @@ const banner = `/*!
  */
 `
 
-export default[ {
+const config = [ {
   input: 'src/firepad.js',
   context: 'this',
   output: {
@@ -39,17 +39,25 @@ export default[ {
       ]
     }),
   ],
-}, production && { // Add minified on production
-  input: 'src/firepad.js',
-  context: 'this',
-  output: {
-    banner,
-    name: 'Firepad',
-    file: 'dist/firepad.min.js',
-    format: 'umd'
-  },
-  plugins: [
-    nodeResolve(),
-    terser()
-  ],
-} ]
+}, ]
+
+
+// Add minified js on production
+if(production){
+  config.push({ 
+    input: 'src/firepad.js',
+    context: 'this',
+    output: {
+      banner,
+      name: 'Firepad',
+      file: 'dist/firepad.min.js',
+      format: 'umd'
+    },
+    plugins: [
+      nodeResolve(),
+      terser()
+    ],
+  })
+}
+
+export default config
