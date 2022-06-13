@@ -1,13 +1,18 @@
 import {TextOperation} from './text-operation.js'
 import {utils} from './utils.js'
 
+import firebase from 'firebase/app';
+import 'firebase/database';
+
+
 
 export const FirebaseAdapter = (function (global) {
 
+  /*
   if (typeof firebase === "undefined" && typeof require === 'function' && typeof Firebase !== 'function') {
 	  firebase = require('firebase/app');
 	  require('firebase/database');
-  }
+  }*/
 
 
   // Save a checkpoint every 100 edits.

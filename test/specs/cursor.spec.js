@@ -1,6 +1,8 @@
+import {Cursor} from '../../src/cursor.js'
+import {TextOperation} from '../../src/text-operation.js'
+
+
 describe('Cursor Tests', function() {
-  var Cursor = firepad.Cursor;
-  var TextOperation = firepad.TextOperation;
 
   it('FromJSON', function() {
     var cursor = Cursor.fromJSON({ position: 3, selectionEnd: 5 });

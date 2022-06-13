@@ -1,10 +1,20 @@
+import {Line} from '../../src/line.js'
+import {Text} from '../../src/text.js'
+import {LineFormatting} from '../../src/line-formatting.js'
+import {Formatting} from '../../src/formatting.js'
+import {ParseHtml} from '../../src/parse-html.js'
+import {sentinelConstants} from '../../src/constants.js'
+import {Entity} from '../../src/entity.js'
+import {EntityManager} from '../../src/entity-manager.js'
+
+
+
+
 describe('Parse HTML Tests', function() {
-  var Line = firepad.Line;
-  var Text = firepad.Text;
-  var lf = firepad.LineFormatting();
-  var tf = firepad.Formatting();
-  var parse = firepad.ParseHtml;
-  var LIST_TYPE = firepad.LineFormatting.LIST_TYPE;
+  var lf = LineFormatting();
+  var tf = Formatting();
+  var parse = ParseHtml;
+  var LIST_TYPE = LineFormatting.LIST_TYPE;
 
   it('Empty HTML', function() {
     parseTest('', []);
@@ -102,10 +112,10 @@ describe('Parse HTML Tests', function() {
   });
 
   function entityText(entityType, info) {
-    var formatting = new firepad.Formatting(
-      (new firepad.Entity(entityType, info)).toAttributes()
+    var formatting = new Formatting(
+      (new Entity(entityType, info)).toAttributes()
     );
-    return Text(firepad.sentinelConstants.ENTITY_SENTINEL_CHARACTER, formatting);
+    return Text(sentinelConstants.ENTITY_SENTINEL_CHARACTER, formatting);
   }
 
   it('Images', function() {
@@ -203,7 +213,7 @@ describe('Parse HTML Tests', function() {
   }
 
   function parseTest(html, expLines) {
-    var actLines = parse(html, new firepad.EntityManager());
+    var actLines = parse(html, new EntityManager());
     for(var i = 0; i < expLines.length; i++) {
       var expLine = dumpLine(expLines[i]);
       if (i >= actLines.length) {

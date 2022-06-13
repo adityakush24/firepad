@@ -1,6 +1,8 @@
+import {TextOp} from '../../src/text-op.js'
+import {TextOperation} from '../../src/text-operation.js'
+import {helpers} from './helpers.js'
+
 describe('TextOperation', function() {
-  var TextOperation = firepad.TextOperation;
-  var TextOp = firepad.TextOp;
   var h = helpers;
 
   var n = 500;

@@ -1,7 +1,33 @@
+import CodeMirror from '../vendor/codemirror5.js'
+import ace from '../vendor/ace/ace.js'
+
+global.CodeMirror = window.CodeMirror = CodeMirror
+global.ace = window.ace = ace
+
+
+
+const Firepad = require('../../src/firepad.js').default
+const {Headless} = require('../../src/headless.js')
+const {helpers, firebase} = require('./helpers.js')
+
+
+
+Range.prototype.getBoundingClientRect = () => ({
+  bottom: 0,
+  height: 0,
+  left: 0,
+  right: 0,
+  top: 0,
+  width: 0,
+});
+Range.prototype.getClientRects = () => ({
+  item: () => null,
+  length: 0,
+  [Symbol.iterator]: jest.fn(),
+});
+
 describe('Integration tests', function() {
   var h = helpers;
-  var Firepad = firepad.Firepad;
-  var Headless = Firepad.Headless;
   var extendedTimeoutLength = 300000;
 
   var _hiddenDiv;

@@ -7,7 +7,8 @@ import { sentinelConstants } from './constants.js';
 import {textPiecesToInserts} from './text-pieces-to-inserts.js'
 import { getDocument, setDocument } from './document.js'
 
-
+import firebase from 'firebase/app';
+import 'firebase/database';
 
 
 
@@ -20,16 +21,8 @@ export const Headless = (function() {
     // Allow calling without new.
     if (!(this instanceof Headless)) { return new Headless(refOrPath); }
 
-    var firebase, ref;
+    var ref;
     if (typeof refOrPath === 'string') {
-      if (window.firebase === undefined && typeof firebase !== 'object') {
-        console.log("REQUIRING");
-        firebase = require('firebase/app');
-        require('firebase/database');
-      } else {
-        firebase = window.firebase;
-      }
-
       ref = firebase.database().refFromURL(refOrPath);
     } else {
       ref = refOrPath;

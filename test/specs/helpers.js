@@ -1,7 +1,42 @@
-firebase.initializeApp(config);
+import {TextOperation} from '../../src/text-operation.js'
 
-var helpers = (function() {
-  var TextOperation = firepad.TextOperation;
+import firebase from 'firebase/app';
+import 'firebase/database'
+
+const {exit} = require('process')
+
+// Gey keys from the env var 
+const firebaseConfig = process.env.FIREBASE_CONFIG
+try {
+  JSON.parse(firebaseConfig)
+}catch(e){
+  console.log(`ERROR: no firebase keys/invalid keys provided. Please setup the FIREBASE_CONFIG env var properly. 
+For example, run something like (replace with your own keys): 
+
+export FIREBASE_CONFIG='{
+  "apiKey": "AHdS3A657ufbgfnhnhH8wtXGCzPFqBWYccsdfdfXSas",
+  "databaseURL": "https://my-database-default-rtdb.europe-west1.firebasedatabase.app"
+}'
+
+Current key:
+${firebaseConfig}
+
+Parsing error:
+${e}
+`)
+
+exit(1)
+}
+
+
+// Setup firebase and start actual tests
+firebase.initializeApp(JSON.parse(firebaseConfig));
+
+
+export {firebase}
+
+
+export const helpers = (function() {
 
   var helpers = { };
   helpers.randomInt = function(n) {

@@ -1,6 +1,10 @@
+import {AnnotationList} from '../../src/annotation-list.js'
+import {Span} from '../../src/span.js'
+import {helpers} from './helpers.js'
+
+
 describe('AnnotationList', function() {
-  var AnnotationList = firepad.AnnotationList;
-  var Span = firepad.Span;
+
   var h = helpers;
 
   var n = 500;

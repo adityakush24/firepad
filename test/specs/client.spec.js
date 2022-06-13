@@ -1,6 +1,9 @@
+import {TextOperation} from '../../src/text-operation.js'
+import {Client} from '../../src/client.js'
+
+
 describe('Client', function() {
-  var TextOperation = firepad.TextOperation;
-  var Client = firepad.Client;
+
 
   it('Client', function() {
     var client = new Client();

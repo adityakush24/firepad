@@ -1,7 +1,12 @@
+import {WrappedOperation} from '../../src/wrapped-operation.js'
+import {TextOperation} from '../../src/text-operation.js'
+import {Cursor} from '../../src/cursor.js'
+import {helpers} from './helpers.js'
+
+
+
 describe('WrappedOperation', function() {
-  var WrappedOperation = firepad.WrappedOperation;
-  var TextOperation = firepad.TextOperation;
-  var Cursor = firepad.Cursor;
+
   var h = helpers;
   var n = 20;
 

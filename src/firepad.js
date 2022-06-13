@@ -205,7 +205,7 @@ const Firepad = (function() {
     this.zombie_ = true; // We've been disposed.  No longer valid to do anything.
 
     // Unwrap the editor.
-    // var editorWrapper = this.codeMirror_ ? this.codeMirror_.getWrapperElement() : this.ace_.container;
+    var editorWrapper;
     if (this.codeMirror_) {
         editorWrapper = this.codeMirror_.getWrapperElement();
     } else if (this.ace_) {

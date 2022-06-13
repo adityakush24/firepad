@@ -16,9 +16,6 @@
     "type": "git",
     "url": "https://github.com/lucafabbian/firepad.git"
   },
-  "browser": {
-    "jsdom": false
-  },
   "bugs": {
     "url": "https://github.com/lucafabbian/firepad/issues"
   },
@@ -46,32 +43,28 @@
     "README.md",
     "package.json"
   ],
-  "dependencies": {
-    "jsdom": "^16.2.2"
-  },
   "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "jsdom": "^16.2.2",
+    "@babel/preset-env": "^7.18.2",
     "@rollup/plugin-node-resolve": "^13.3.0",
+    "babel-jest": "^28.1.1",
     "coveralls": "^3.0.11",
-    "jasmine-core": "^3.5.0",
-    "karma": "^4.4.1",
-    "karma-chrome-launcher": "^3.1.0",
-    "karma-coverage": "^2.0.1",
-    "karma-failed-reporter": "0.0.3",
-    "karma-jasmine": "^3.1.1",
-    "karma-spec-reporter": "0.0.32",
+    "jest": "^28.1.1",
+    "jest-environment-jsdom": "^28.1.1",
     "monaco-editor": "^0.20.0",
     "rollup": "^2.75.6",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-terser": "^7.0.2"
   },
   "peerDependencies": {
-    "firebase": "^9.8.3",
+    "firebase": "^8.10.1",
     "@codemirror/state": "^6.0.0",
     "codemirror": "^6.0.0"
   },
   "scripts": {
-    "test": "karma start test/karma.conf.js # CURRENTLY BROKEN!!!",
     "dev": "rollup -w -c",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "test": "jest --detectOpenHandles --force-exit"
   }
 }

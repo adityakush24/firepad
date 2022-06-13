@@ -1,3 +1,7 @@
+import {MonacoAdapter} from '../../src/monaco-adapter.js'
+import {TextOperation} from '../../src/text-operation.js'
+
+
 /** Monaco Adapter Unit Tests */
 describe('Monaco Operations Test', function () {
     /** Editor Content */
@@ -26,12 +30,11 @@ describe('Monaco Operations Test', function () {
 
     /** Expected Text Operations */
     var textOperations = [
-        new firepad.TextOperation().retain(21).insert('/* ').retain(281),
-        new firepad.TextOperation().retain(299).insert(' */').retain(6)
+        new TextOperation().retain(21).insert('/* ').retain(281),
+        new TextOperation().retain(299).insert(' */').retain(6)
     ];
 
     it('should convert Monaco Editor changes to Text Operation', function () {
-        var MonacoAdapter = firepad.MonacoAdapter;
         var operationFromMonacoChange = MonacoAdapter.prototype.operationFromMonacoChanges;
 
         let offset = 0;
