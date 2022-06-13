@@ -1,5 +1,5 @@
-import {AnnotationList} from '../../src/annotation-list.js'
-import {Span} from '../../src/span.js'
+import {AnnotationList} from '../src/annotation-list.js'
+import {Span} from '../src/span.js'
 import {helpers} from './helpers.js'
 
 

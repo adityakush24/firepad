@@ -7,8 +7,8 @@ import { sentinelConstants } from './constants.js';
 import {textPiecesToInserts} from './text-pieces-to-inserts.js'
 import { getDocument, setDocument } from './document.js'
 
-import firebase from 'firebase/app';
-import 'firebase/database';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/database';
 
 
 
@@ -77,6 +77,7 @@ export const Headless = (function() {
     if (typeof getDocument() === 'object') {
       callback();
     } else {
+      const require = global.require
       const jsdom = require('jsdom');
       const { JSDOM } = jsdom;
       const { window } = new JSDOM("<head></head><body></body>");

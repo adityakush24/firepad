@@ -1,5 +1,5 @@
-import {Cursor} from '../../src/cursor.js'
-import {TextOperation} from '../../src/text-operation.js'
+import {Cursor} from '../src/cursor.js'
+import {TextOperation} from '../src/text-operation.js'
 
 
 describe('Cursor Tests', function() {

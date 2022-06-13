@@ -1,8 +1,8 @@
 import {TextOperation} from './text-operation.js'
 import {utils} from './utils.js'
 
-import firebase from 'firebase/app';
-import 'firebase/database';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/database';
 
 
 

@@ -1,13 +1,13 @@
-import CodeMirror from '../vendor/codemirror5.js'
-import ace from '../vendor/ace/ace.js'
+import CodeMirror from '../examples/vendor/codemirror5.js'
+import ace from 'ace-builds'
 
 global.CodeMirror = window.CodeMirror = CodeMirror
 global.ace = window.ace = ace
 
 
 
-const Firepad = require('../../src/firepad.js').default
-const {Headless} = require('../../src/headless.js')
+const Firepad = require('../src/firepad.js').default
+const {Headless} = require('../src/headless.js')
 const {helpers, firebase} = require('./helpers.js')
 
 

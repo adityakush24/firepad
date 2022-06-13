@@ -1,5 +1,5 @@
-import {TextOperation} from '../../src/text-operation.js'
-import {Client} from '../../src/client.js'
+import {TextOperation} from '../src/text-operation.js'
+import {Client} from '../src/client.js'
 
 
 describe('Client', function() {

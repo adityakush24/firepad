@@ -1,11 +1,11 @@
-import {Line} from '../../src/line.js'
-import {Text} from '../../src/text.js'
-import {LineFormatting} from '../../src/line-formatting.js'
-import {Formatting} from '../../src/formatting.js'
-import {ParseHtml} from '../../src/parse-html.js'
-import {sentinelConstants} from '../../src/constants.js'
-import {Entity} from '../../src/entity.js'
-import {EntityManager} from '../../src/entity-manager.js'
+import {Line} from '../src/line.js'
+import {Text} from '../src/text.js'
+import {LineFormatting} from '../src/line-formatting.js'
+import {Formatting} from '../src/formatting.js'
+import {ParseHtml} from '../src/parse-html.js'
+import {sentinelConstants} from '../src/constants.js'
+import {Entity} from '../src/entity.js'
+import {EntityManager} from '../src/entity-manager.js'
 
 
 

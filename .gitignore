@@ -4,14 +4,10 @@ build/
 bower_components/
 *.sw?
 .DS_Store
-test/coverage/
+coverage/
 node_modules
+.parcel-cache
 
-# generated
-#lib/ace-adapter.js
-#dist/firepad.zip
-#dist/
-test/specs/firebase-config.js
 
 *.log
 _site/

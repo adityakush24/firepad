@@ -1,6 +1,6 @@
-import {WrappedOperation} from '../../src/wrapped-operation.js'
-import {TextOperation} from '../../src/text-operation.js'
-import {Cursor} from '../../src/cursor.js'
+import {WrappedOperation} from '../src/wrapped-operation.js'
+import {TextOperation} from '../src/text-operation.js'
+import {Cursor} from '../src/cursor.js'
 import {helpers} from './helpers.js'
 
 

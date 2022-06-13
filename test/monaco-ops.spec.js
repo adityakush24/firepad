@@ -1,5 +1,5 @@
-import {MonacoAdapter} from '../../src/monaco-adapter.js'
-import {TextOperation} from '../../src/text-operation.js'
+import {MonacoAdapter} from '../src/monaco-adapter.js'
+import {TextOperation} from '../src/text-operation.js'
 
 
 /** Monaco Adapter Unit Tests */

@@ -1,5 +1,5 @@
-import {UndoManager} from '../../src/undo-manager.js'
-import {TextOperation} from '../../src/text-operation.js'
+import {UndoManager} from '../src/undo-manager.js'
+import {TextOperation} from '../src/text-operation.js'
 import {helpers} from './helpers.js'
 
 describe('UndoManager', function() {

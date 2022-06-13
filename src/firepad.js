@@ -1,3 +1,15 @@
+/*!
+ * Firepad is an open-source, collaborative code and text editor. It was designed
+ * to be embedded inside larger applications. Since it uses Firebase as a backend,
+ * it requires no server-side code and can be added to any web app simply by
+ * including a couple JavaScript files.
+ *
+ * http://www.firepad.io/
+ * License: MIT
+ * Copyright: 2014 Firebase
+ * With code from ot.js (Copyright 2012-2013 Tim Baumann)
+ */
+
 import {TextOperation} from './text-operation.js'
 import {FirebaseAdapter} from './firebase-adapter.js'
 import {EntityManager} from './entity-manager.js'
@@ -11,7 +23,6 @@ import {EditorClient} from './editor-client.js'
 import {Text} from './text.js'
 import { Entity } from './entity.js';
 import {Line} from './line.js'
-import {Headless} from './headless.js'
 import {Formatting} from './formatting.js'
 
 
@@ -608,7 +619,6 @@ Object.assign( Firepad, {
   LineFormatting,
   Line,
   TextOperation,
-  Headless,
 
   // Export adapters
   RichTextCodeMirrorAdapter,
@@ -620,3 +630,4 @@ Object.assign( Firepad, {
 
 
 export default Firepad
+export {Headless} from './headless.js'

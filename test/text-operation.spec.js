@@ -1,5 +1,5 @@
-import {TextOp} from '../../src/text-op.js'
-import {TextOperation} from '../../src/text-operation.js'
+import {TextOp} from '../src/text-op.js'
+import {TextOperation} from '../src/text-operation.js'
 import {helpers} from './helpers.js'
 
 describe('TextOperation', function() {

@@ -3,14 +3,12 @@
  * https://jestjs.io/docs/configuration
  */
 
-module.exports = {
+export default {
+  // Coverage is currently broken
   //collectCoverage: true,
-  coverageDirectory: "test/coverage",
-  coverageProvider: "v8",
+  //coverageProvider: "v8",
 
   testEnvironment: "jsdom",
 
-  transformIgnorePatterns: [
-    "test/vendor/*.js"
-  ],
+  transformIgnorePatterns: [],
 };

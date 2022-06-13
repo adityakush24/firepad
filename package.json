@@ -1,11 +1,11 @@
 {
-  "name": "@lucafabbian/firepad",
+  "name": "@lucafabbian/firepad2",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "description": "Collaborative text editing powered by Firebase",
-  "version": "1.5.14",
+  "version": "1.5.15",
   "author": "Firebase (https://firebase.google.com/)",
   "contributors": [
     "Luca Fabbian <luca.fabbian.1999@gmail.com>",
@@ -34,8 +34,8 @@
     "collaborative",
     "codemirror6"
   ],
-  "main": "dist/firepad.min.js",
   "module": "src/firepad.js",
+  "type": "module",
   "files": [
     "dist/**",
     "src/**",
@@ -45,26 +45,31 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.18.2",
-    "jsdom": "^16.2.2",
     "@babel/preset-env": "^7.18.2",
-    "@rollup/plugin-node-resolve": "^13.3.0",
     "babel-jest": "^28.1.1",
-    "coveralls": "^3.0.11",
     "jest": "^28.1.1",
     "jest-environment-jsdom": "^28.1.1",
-    "monaco-editor": "^0.20.0",
-    "rollup": "^2.75.6",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "parcel": "^2.6.0"
   },
   "peerDependencies": {
-    "firebase": "^8.10.1",
     "@codemirror/state": "^6.0.0",
-    "codemirror": "^6.0.0"
+    "ace-builds": "^1.6.0",
+    "codemirror": "^6.0.0",
+    "firebase": "^9.8.3",
+    "jsdom": "^16.2.2",
+    "monaco-editor": "^0.20.0"
   },
   "scripts": {
-    "dev": "rollup -w -c",
-    "build": "rollup -c",
+    "examples": "parcel examples/*.html --dist-dir=examples-dist",
+    "build": "parcel build examples/*.html --dist-dir=examples-dist",
     "test": "jest --detectOpenHandles --force-exit"
+  },
+  "alias": {
+    "process": false,
+    "@lucafabbian/firepad": "./src/firepad.js"
+  },
+  "targets": {
+    "main": false,
+    "module": false
   }
 }

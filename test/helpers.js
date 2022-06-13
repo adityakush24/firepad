@@ -1,7 +1,7 @@
-import {TextOperation} from '../../src/text-operation.js'
+import {TextOperation} from '../src/text-operation.js'
 
-import firebase from 'firebase/app';
-import 'firebase/database'
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/database'
 
 const {exit} = require('process')
 
