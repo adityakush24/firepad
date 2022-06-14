@@ -2,26 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Firepad with codemirror</title>
+  <title>Ace + Codemirror6</title>
   
 </head>
 <body>
-  <h1>Firepad Ace + Codemirror6 demo!</h1>
+  <h1>Firepad: Ace + Codemirror6 demo!</h1>
   <p>Example of realtime collaboration using firebase.</p>
   <p>Write in the ACE editor above and check the result in the Codemirror 6 editor below (or vice-versa).</p>
   <p id="ace-editor"></p>
   <p id="codemirror-editor"></p>
+
   <script type="module">
-    // Editors
     import {EditorView, basicSetup} from "codemirror"
     import ace from 'ace-builds'
+    import monaco from 'monaco-editor'
 
     import firebase from 'firebase/compat/app'
     import 'firebase/compat/database'
 
     import Firepad from '@lucafabbian/firepad'
-
-
 
 
     // Get a reference to the database service
@@ -36,27 +35,28 @@
     document.addEventListener("DOMContentLoaded", () => {
 
       // ACE EDITOR
-      const editor = ace.edit('ace-editor');
-      editor.setOptions({
+      const aceEditor = ace.edit('ace-editor');
+      aceEditor.setOptions({
         showPrintMargin: false, 
         maxLines: Infinity,
         fontSize: "100%"
       });
       // wrap ACE with firepad
-      Firepad.fromACE(database.ref("firepad-test-database"), editor, {
+      Firepad.fromACE(database.ref("firepad-test-database"), aceEditor, {
         defaultText: 'hello',
       });
 
 
       // CODEMIRROR 6
-      const codemirror = new EditorView({
+      const codemirror6Editor = new EditorView({
         extensions: [basicSetup ],
         parent: document.getElementById('codemirror-editor')
       })
       // wrap Codemirror 6 with firepad  
-      Firepad.fromCodeMirror6(database.ref("firepad-test-database"), codemirror, {
+      Firepad.fromCodeMirror6(database.ref("firepad-test-database"), codemirror6Editor, {
         defaultText: 'hello',
       });
+
     })
   </script>
 </body>

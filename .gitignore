@@ -12,3 +12,5 @@ node_modules
 *.log
 _site/
 .firebase/
+
+examples-dist/

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Monaco</title>
+  
+</head>
+<body>
+  <h1>Firepad: Monaco demo!</h1>
+  <p>Example of realtime collaboration using firebase.</p>
+  <p>This demo shows how to use Firebase with the monaco editor.</p>
+  <div id="monaco-editor" style="width:800px;height:600px;border:1px solid grey"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.0-dev.20220613/min/vs/loader.min.js"></script>
+
+
+  <script type="module">
+    import firebase from 'firebase/compat/app'
+    import 'firebase/compat/database'
+
+    import Firepad from '@lucafabbian/firepad'
+
+
+    // Get a reference to the database service
+    const app = firebase.initializeApp({
+      apiKey: prompt("Insert your Firebase apiKey").trim(),
+      databaseURL: prompt("Insert your Firebase databaseURL").trim(),
+    });
+    const database = firebase.database(app);
+
+
+    /* Setup the editors */
+    document.addEventListener("DOMContentLoaded", () => {
+      window.require.config({ paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.34.0-dev.20220613/min/vs' } });
+			window.require(['vs/editor/editor.main'], () => {
+				const monacoEditor = monaco.editor.create(document.getElementById('monaco-editor'));
+
+        Firepad.fromMonaco(database.ref("firepad-test-database"), monacoEditor, {
+          defaultText: 'hello',
+        });
+			});
+
+    })
+  </script>
+</body>
+</html>

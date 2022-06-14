@@ -34,6 +34,7 @@
     "collaborative",
     "codemirror6"
   ],
+  "main": "src/firepad.js",
   "module": "src/firepad.js",
   "type": "module",
   "files": [
@@ -49,7 +50,8 @@
     "babel-jest": "^28.1.1",
     "jest": "^28.1.1",
     "jest-environment-jsdom": "^28.1.1",
-    "parcel": "^2.6.0"
+    "parcel": "^2.6.0",
+    "prettier": "^2.7.0"
   },
   "peerDependencies": {
     "@codemirror/state": "^6.0.0",
@@ -60,6 +62,7 @@
     "monaco-editor": "^0.20.0"
   },
   "scripts": {
+    "prettify": "prettier --write src/* test/*",
     "examples": "parcel examples/*.html --dist-dir=examples-dist",
     "build": "parcel build examples/*.html --dist-dir=examples-dist",
     "test": "jest --detectOpenHandles --force-exit"
