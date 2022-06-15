@@ -1,11 +1,11 @@
 {
-  "name": "@lucafabbian/firepad2",
+  "name": "@lucafabbian/firepad",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "description": "Collaborative text editing powered by Firebase",
-  "version": "1.5.16",
+  "version": "1.5.15",
   "author": "Firebase (https://firebase.google.com/)",
   "contributors": [
     "Luca Fabbian <luca.fabbian.1999@gmail.com>",

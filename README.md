@@ -16,11 +16,10 @@ Some major changes:
 
 
 ### Status
-The new build system seem to work without any issue. After the `jest` rewrite, tests are working again.
 
-Codemirror 6 works, while still missing multicursor display and other minor features.
-
-Old examples need to be refactored and updated.
+- The new build system seem to work without any issue. After the `jest` rewrite, tests are working again.
+- Codemirror6 works, while still missing multicursor display and other minor features.
+- Old examples need to be refactored and updated.
 
 
 ## Getting started
