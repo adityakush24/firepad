@@ -293,7 +293,10 @@ const Firepad = (function () {
     this.assertReady_("setText")
 
     if (this.codeMirror6_) {
-      this.codeMirror6_.state.doc.toString()
+      return this.codeMirror6_.dispatch({
+        changes: {from: 0, to: this.codeMirror6_.state.doc.length, insert: textPieces}
+      })
+      
     } else if (this.monaco_) {
       return this.monaco_.getModel().setValue(textPieces)
     } else if (this.ace_) {
