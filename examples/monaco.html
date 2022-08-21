@@ -23,8 +23,8 @@
 
     // Get a reference to the database service
     const app = firebase.initializeApp({
-      apiKey: prompt("Insert your Firebase apiKey").trim(),
-      databaseURL: prompt("Insert your Firebase databaseURL").trim(),
+      apiKey: localStorage.apiKey || prompt("Insert your Firebase apiKey").trim(),
+      databaseURL: localStorage.databaseURL || prompt("Insert your Firebase databaseURL").trim(),
     });
     const database = firebase.database(app);
 

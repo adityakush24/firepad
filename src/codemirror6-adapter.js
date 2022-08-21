@@ -1,7 +1,7 @@
 import { TextOperation } from "./text-operation.js"
 import { Cursor } from "./cursor.js"
 
-import { Annotation, StateEffect } from "@codemirror/state"
+import { Annotation, StateEffect, EditorState } from "@codemirror/state"
 ;("use strict")
 
 /**
@@ -47,6 +47,56 @@ var addStyleRule = function addStyleRule(clazz, css) {
   }
 }
 
+
+const addCodemirror6listener = (_this) => {
+  _this.cm.dispatch({
+    effects: StateEffect.appendConfig.of(
+      _this.cm.constructor.updateListener.of((v) => {
+        if (
+          v.docChanged &&
+          !(
+            v.transactions[0] &&
+            v.transactions[0].annotations.some((a) => a.type == "firepad")
+          )
+        ) {
+          let index = 0
+          let change_op = new TextOperation()
+          let inverse_op = new TextOperation()
+
+          //Iterate over changes
+          v.changes.toJSON().forEach((c) => {
+            if (typeof c == "number") {
+              if (c != 0) {
+                index += c
+                change_op = change_op.retain(c)
+                inverse_op = inverse_op.retain(c)
+              }
+            } else if (typeof c == "object") {
+              const [len, ...inserts] = c
+              if (len > 0) {
+                change_op = change_op.delete(len)
+                inverse_op = inverse_op.insert(
+                  v.startState.sliceDoc(index, index + len)
+                )
+              }
+              if (inserts) {
+                const jInserts = inserts.join("\n")
+                change_op = change_op.insert(jInserts)
+                inverse_op = inverse_op.delete(jInserts.length)
+              }
+            }
+          })
+
+          _this.trigger("change", change_op, inverse_op)
+        }
+
+        /** Update Editor Content */
+        _this.lastDocLines = _this.cm.state.doc.text
+      })
+    ),
+  })
+}
+
 /**
  * CodeMirror6 Adapter
  * Create Pipe between Firebase and CodeMirror6 Text Editor
@@ -69,18 +119,13 @@ var CodeMirror6Adapter = (function () {
    * @prop {CodeMirror6IDisposable} didFocusHandler - Event Handler for Focus Gain on Editor Text/Widget
    * @prop {CodeMirror6IDisposable} didChangeCursorPositionHandler - Event Handler for Cursor Position Change
    */
-  function CodeMirror6Adapter(cmIstance) {
+  function CodeMirror6Adapter(cmIstance, options = {}) {
     /* TODO: check if is valid codemirror6 istance
-
-    // Make sure this looks like a valid CodeMirror6 instance.
-    if (!monacoInstance || typeof monacoInstance.getModel !== 'function') {
-      throw new Error('CodeMirror6Adapter: Incorrect Parameter Recieved in constructor, '
-        + 'expected valid CodeMirror6 Instance');
-    }
-
     */
 
     /** CodeMirror6 Member Variables */
+    this.isFirstTime = options.recreateWith ? true : false
+    this.options = options
     this.cm = cmIstance
     this.lastDocLines = this.cm.state.doc.text
     this.lastCursorRange = this.cm.state.selection.main
@@ -95,61 +140,10 @@ var CodeMirror6Adapter = (function () {
     this.onBlur = this.onBlur.bind(this)
     this.onFocus = this.onFocus.bind(this)
     this.onCursorActivity = this.onCursorActivity.bind(this)
-    var _this = this
 
-    _this.cm.dispatch({
-      effects: StateEffect.appendConfig.of(
-        _this.cm.constructor.updateListener.of((v) => {
-          if (
-            v.docChanged &&
-            !(
-              v.transactions[0] &&
-              v.transactions[0].annotations.some((a) => a.type == "firepad")
-            )
-          ) {
-            let index = 0
-            let change_op = new TextOperation()
-            let inverse_op = new TextOperation()
 
-            //Iterate over changes
-            v.changes.toJSON().forEach((c) => {
-              if (typeof c == "number") {
-                if (c != 0) {
-                  index += c
-                  change_op = change_op.retain(c)
-                  inverse_op = inverse_op.retain(c)
-                }
-              } else if (typeof c == "object") {
-                const [len, ...inserts] = c
-                if (len > 0) {
-                  change_op = change_op.delete(len)
-                  inverse_op = inverse_op.insert(
-                    v.startState.sliceDoc(index, index + len)
-                  )
-                }
-                if (inserts) {
-                  const jInserts = inserts.join("\n")
-                  change_op = change_op.insert(jInserts)
-                  inverse_op = inverse_op.delete(jInserts.length)
-                }
-              }
-            })
+    addCodemirror6listener(this)
 
-            this.trigger("change", change_op, inverse_op)
-          }
-
-          /** Update Editor Content */
-          this.lastDocLines = this.cm.state.doc.text
-        })
-      ),
-    })
-
-    /** Editor Callback Handler
-    this.changeHandler = this.monaco.onDidChangeModelContent(this.onChange);
-    this.didBlurHandler = this.monaco.onDidBlurEditorWidget(this.onBlur);
-    this.didFocusHandler = this.monaco.onDidFocusEditorWidget(this.onFocus);
-    this.didChangeCursorPositionHandler = this.monaco.onDidChangeCursorPosition(this.onCursorActivity);
-    */
   }
 
   /**
@@ -317,6 +311,8 @@ var CodeMirror6Adapter = (function () {
   CodeMirror6Adapter.prototype.applyOperation = function applyOperation(
     operation
   ) {
+
+    let somethingInserted = false
     if (!operation.isNoop()) {
       this.ignoreChanges = true
     }
@@ -331,6 +327,7 @@ var CodeMirror6Adapter = (function () {
         index += op.chars
       } else if (op.isInsert()) {
         /** Insert Operation */
+        somethingInserted = true
         _this.cm.dispatch({
           annotations: [new Annotation("firepad", true)],
           changes: { from: index, to: index, insert: op.text },
@@ -349,6 +346,12 @@ var CodeMirror6Adapter = (function () {
     /** Update Editor Content and Reset Config */
     this.lastDocLines = this.cm.state.doc.text
     this.ignoreChanges = false
+
+    if(somethingInserted && this.isFirstTime){
+      this.isFirstTime = false
+      this.cm.setState(EditorState.create({doc: this.lastDocLines.join('\n'), extensions: this.options.recreateWith}))
+      addCodemirror6listener(this)
+    }
   }
 
   /**
