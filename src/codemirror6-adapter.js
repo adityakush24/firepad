@@ -311,7 +311,6 @@ var CodeMirror6Adapter = (function () {
   CodeMirror6Adapter.prototype.applyOperation = function applyOperation(
     operation
   ) {
-    console.log("dsvbgbgfbgfb")
 
     if (!operation.isNoop()) {
       this.ignoreChanges = true
@@ -337,7 +336,6 @@ var CodeMirror6Adapter = (function () {
           annotations: [new Annotation("firepad", true)],
           changes: { from: index, to: index, insert: op.text },
         })
-        console.log("inserted" + op.text)
 
         index += op.text.length
       } else if (op.isDelete()) {
@@ -350,7 +348,6 @@ var CodeMirror6Adapter = (function () {
     })
 
     /** Update Editor Content and Reset Config */
-    console.log(this.cm.state.doc.text)
     this.lastDocLines = this.cm.state.doc.text
     this.ignoreChanges = false
 
