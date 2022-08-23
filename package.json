@@ -5,7 +5,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "description": "Collaborative text editing powered by Firebase",
-  "version": "1.5.18",
+  "version": "1.5.19",
   "author": "Firebase (https://firebase.google.com/)",
   "contributors": [
     "Luca Fabbian <luca.fabbian.1999@gmail.com>",

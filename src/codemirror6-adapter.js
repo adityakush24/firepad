@@ -311,8 +311,8 @@ var CodeMirror6Adapter = (function () {
   CodeMirror6Adapter.prototype.applyOperation = function applyOperation(
     operation
   ) {
+    console.log("dsvbgbgfbgfb")
 
-    let somethingInserted = false
     if (!operation.isNoop()) {
       this.ignoreChanges = true
     }
@@ -327,11 +327,17 @@ var CodeMirror6Adapter = (function () {
         index += op.chars
       } else if (op.isInsert()) {
         /** Insert Operation */
-        somethingInserted = true
+        if(_this.isFirstTime){
+          _this.isFirstTime = false
+          _this.cm.setState(EditorState.create({doc: (_this.lastDocLines || []).join('\n'), extensions: _this.options.recreateWith}))
+          addCodemirror6listener(_this)
+        }
+
         _this.cm.dispatch({
           annotations: [new Annotation("firepad", true)],
           changes: { from: index, to: index, insert: op.text },
         })
+        console.log("inserted" + op.text)
 
         index += op.text.length
       } else if (op.isDelete()) {
@@ -344,14 +350,10 @@ var CodeMirror6Adapter = (function () {
     })
 
     /** Update Editor Content and Reset Config */
+    console.log(this.cm.state.doc.text)
     this.lastDocLines = this.cm.state.doc.text
     this.ignoreChanges = false
 
-    if(somethingInserted && this.isFirstTime){
-      this.isFirstTime = false
-      this.cm.setState(EditorState.create({doc: this.lastDocLines.join('\n'), extensions: this.options.recreateWith}))
-      addCodemirror6listener(this)
-    }
   }
 
   /**
