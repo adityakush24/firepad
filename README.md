@@ -76,7 +76,6 @@ Then, in the same folder, create an `index.html` file (replace the keys below wi
     // wrap Codemirror 6 with firepad  
     Firepad.fromCodeMirror6(database.ref("firepad-test-database"), codemirror, {
       defaultText: 'hello',
-      recreateWith: [basicSetup ], // this is currently a temporary patch, see more below
     });
   })
 </script>
@@ -89,11 +88,6 @@ npx parcel index.html
 And open your browser to <http://localhost:1234>
 
 Enjoy :)
-
-#### The `recreateWith` option
-The "undo/redo" model of Codemirror6 does not play well with the one of firepad. This leads to a dangerous default behaviour: if the user clicks undo before any change, the editor is reverted to its initial blank state, thus deleting the text. 
-
-Currently, you may prevent this behaviour with a dirty hack, which works this way: as soon as the editor is ready, recreate it so its state is resetted. However, in order to accomplish this reset, you need to instantiate the Codemirror6 extentions again. You may enable this behaviour and setup the extensions with the `recreateWith` option, as shown in the example above.
 
 
 ## Examples

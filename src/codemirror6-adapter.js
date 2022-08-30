@@ -1,7 +1,8 @@
 import { TextOperation } from "./text-operation.js"
 import { Cursor } from "./cursor.js"
 
-import { Annotation, StateEffect, EditorState } from "@codemirror/state"
+import { Annotation, StateEffect, EditorState, Transaction } from "@codemirror/state"
+import { isolateHistory } from "@codemirror/commands"
 ;("use strict")
 
 /**
@@ -124,7 +125,6 @@ var CodeMirror6Adapter = (function () {
     */
 
     /** CodeMirror6 Member Variables */
-    this.isFirstTime = options.recreateWith ? true : false
     this.options = options
     this.cm = cmIstance
     this.lastDocLines = this.cm.state.doc.text
@@ -326,14 +326,8 @@ var CodeMirror6Adapter = (function () {
         index += op.chars
       } else if (op.isInsert()) {
         /** Insert Operation */
-        if(_this.isFirstTime){
-          _this.isFirstTime = false
-          _this.cm.setState(EditorState.create({doc: (_this.lastDocLines || []).join('\n'), extensions: _this.options.recreateWith}))
-          addCodemirror6listener(_this)
-        }
-
         _this.cm.dispatch({
-          annotations: [new Annotation("firepad", true)],
+          annotations: [ Transaction.addToHistory.of(false), new Annotation("firepad", true)],
           changes: { from: index, to: index, insert: op.text },
         })
 
@@ -341,7 +335,7 @@ var CodeMirror6Adapter = (function () {
       } else if (op.isDelete()) {
         /** Delete Operation */
         _this.cm.dispatch({
-          annotations: [new Annotation("firepad", true)],
+          annotations: [Transaction.addToHistory.of(false),  new Annotation("firepad", true)],
           changes: { from: index, to: index + op.chars, insert: "" },
         })
       }
